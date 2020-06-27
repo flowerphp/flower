@@ -1,0 +1,21 @@
+{
+  "name": "flowerphp/flower",
+  "description": "Flower a new Framework",
+  "minimum-stability": "stable",
+  "license": "AGPL-3.0-only",
+  "authors": [
+    {
+      "name": "FlexICE",
+      "email": "fl3xice@yandex.ru"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*",
+    "guzzlehttp/guzzle": "7.0.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "App\\Core\\": "app/core"
+    }
+  }
+}

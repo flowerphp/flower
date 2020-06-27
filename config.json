@@ -1,0 +1,21 @@
+{
+  "application": {
+    "name": "flower",
+    "version": "1.0.0",
+    "description": "the description"
+  },
+  "reCaptchaService": {
+    "enabled": false,
+    "SiteKey": "your_site_key",
+    "SecretKey": "your_secret_key"
+  },
+  "databases": {
+    "MySQL": {
+      "enabled": false,
+      "host": "",
+      "user_name": "",
+      "data_base_name": "",
+      "password": ""
+    }
+  }
+}
