@@ -10,7 +10,7 @@ final class ExtremeReCaptchaServicePromise extends ExtremePromise
     private $SiteKey;
     private $SecretKey;
 
-    public function __construct(reCaptchaServicePromise $reCaptchaServicePromise)
+    public function __construct(reCaptchaServiceConfigPromise $reCaptchaServicePromise)
     {
         $this->enabled = $reCaptchaServicePromise->getEnabled();
         $this->SecretKey = $reCaptchaServicePromise->getSecretKey();

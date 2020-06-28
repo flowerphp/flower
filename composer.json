@@ -13,7 +13,8 @@
     "ext-pdo": "*",
     "guzzlehttp/guzzle": "7.0.1",
     "league/flysystem": "^1.0",
-    "ext-json": "*"
+    "ext-json": "*",
+    "altorouter/altorouter": "1.1.0"
   },
   "autoload": {
     "psr-4": {

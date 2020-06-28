@@ -8,11 +8,29 @@ class ConfigPromise extends Promise
 {
     private $application;
     private $reCaptchaService;
+    private $databases;
 
     public function __construct()
     {
         $this->application = new ApplicationConfigPromise();
-        $this->reCaptchaService = new reCaptchaServicePromise();
+        $this->reCaptchaService = new reCaptchaServiceConfigPromise();
+        $this->databases = new DatabasesConfigPromise();
+    }
+
+    /**
+     * @param DatabasesConfigPromise $databases
+     */
+    public function setDatabases(DatabasesConfigPromise $databases)
+    {
+        $this->databases = $databases;
+    }
+
+    /**
+     * @return DatabasesConfigPromise
+     */
+    public function getDatabases(): DatabasesConfigPromise
+    {
+        return $this->databases;
     }
 
     /**
@@ -32,17 +50,17 @@ class ConfigPromise extends Promise
     }
 
     /**
-     * @return reCaptchaServicePromise
+     * @return reCaptchaServiceConfigPromise
      */
-    public function getReCaptchaService(): reCaptchaServicePromise
+    public function getReCaptchaService(): reCaptchaServiceConfigPromise
     {
         return $this->reCaptchaService;
     }
 
     /**
-     * @param reCaptchaServicePromise $reCaptchaService
+     * @param reCaptchaServiceConfigPromise $reCaptchaService
      */
-    public function setReCaptchaService(reCaptchaServicePromise $reCaptchaService)
+    public function setReCaptchaService(reCaptchaServiceConfigPromise $reCaptchaService)
     {
         $this->reCaptchaService = $reCaptchaService;
     }

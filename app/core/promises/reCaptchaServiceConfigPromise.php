@@ -4,7 +4,7 @@
 namespace App\Core\Promises;
 
 
-class reCaptchaServicePromise extends Promise
+class reCaptchaServiceConfigPromise extends Promise
 {
     private $enabled;
     private $SiteKey;

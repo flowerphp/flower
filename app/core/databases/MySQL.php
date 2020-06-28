@@ -4,6 +4,7 @@
 namespace App\Core\Databases;
 
 
+use App\Core\Core;
 use PDO;
 
 class MySQL
@@ -12,6 +13,45 @@ class MySQL
     private $db_name;
     private $user_name;
     private $password;
+
+    private $Core;
+
+    public function __construct(Core $core)
+    {
+        $this->Core = $core;
+
+        $this->host_name = $core
+            ->getPromise()
+            ->getConfig()
+            ->getPromise()
+            ->getDatabases()
+            ->getMySQL()
+            ->getHost();
+
+        $this->db_name = $core
+            ->getPromise()
+            ->getConfig()
+            ->getPromise()
+            ->getDatabases()
+            ->getMySQL()
+            ->getDataBaseName();
+
+        $this->user_name = $core
+            ->getPromise()
+            ->getConfig()
+            ->getPromise()
+            ->getDatabases()
+            ->getMySQL()
+            ->getUserName();
+
+        $this->password = $core
+            ->getPromise()
+            ->getConfig()
+            ->getPromise()
+            ->getDatabases()
+            ->getMySQL()
+            ->getPassword();
+    }
 
     /**
      * @return string
@@ -45,21 +85,13 @@ class MySQL
         return $this->user_name;
     }
 
-    public function __construct(string $host_name, $db_name, $user_name, $password)
-    {
-        $this->host_name = $host_name;
-        $this->db_name = $db_name;
-        $this->user_name = $user_name;
-        $this->password = $password;
-    }
-
     /**
      * @return PDO
      */
     public function getConnection() : PDO
     {
         return new PDO(
-            $this->getHostName(),
+            "mysql:host=".$this->getHostName().";dbname=".$this->getDbName(),
             $this->getUserName(),
             $this->getPassword()
         );
