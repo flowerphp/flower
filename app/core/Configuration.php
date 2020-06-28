@@ -5,6 +5,7 @@ namespace App\Core;
 
 
 use App\Core\Promises\ConfigPromise;
+use App\Core\Promises\ExtremeConfigPromise;
 
 class Configuration
 {
@@ -18,18 +19,20 @@ class Configuration
 
         $this->setArrayConfig();
 
-        $this->promise = new ConfigPromise();
+        $ConfigPromise = new ConfigPromise();
 
-        $this->promise->getApplication()->setName($this->array_config['application']['name']);
-        $this->promise->getApplication()->setVersion($this->array_config['application']['version']);
-        $this->promise->getApplication()->setDescription($this->array_config['application']['description']);
+        $ConfigPromise->getApplication()->setName($this->array_config['application']['name']);
+        $ConfigPromise->getApplication()->setVersion($this->array_config['application']['version']);
+        $ConfigPromise->getApplication()->setDescription($this->array_config['application']['description']);
+
+        $this->promise = new ExtremeConfigPromise($ConfigPromise);
 
     }
 
     /**
-     * @return ConfigPromise
+     * @return ExtremeConfigPromise
      */
-    public function getPromise() : ConfigPromise
+    public function getPromise() : ExtremeConfigPromise
     {
         return $this->promise;
     }

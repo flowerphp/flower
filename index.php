@@ -15,4 +15,3 @@ $Core = new Core(
     )
 );
 
-print $Core->getPromise()->getConfig()->getPromise()->getApplication()->getName();
