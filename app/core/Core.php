@@ -4,6 +4,7 @@
 namespace App\Core;
 
 
+use App\Core\Promises\CorePromise;
 use GuzzleHttp\Psr7\Request;
 
 class Core
@@ -15,6 +16,7 @@ class Core
     {
         $this->promise = new CorePromise();
         $this->promise->setRequest($request);
+        $this->promise->setConfig(new Configuration());
     }
 
     /**
