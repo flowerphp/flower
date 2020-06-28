@@ -4,7 +4,7 @@
 namespace App\Core\Promises;
 
 
-class ExtremeMysqlDatabasesConfigPromise extends ExtremePromise
+final class ExtremeMysqlDatabasesConfigPromise extends ExtremePromise
 {
     private $enabled;
     private $host;
