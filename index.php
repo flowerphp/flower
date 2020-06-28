@@ -14,4 +14,3 @@ $Core = new Core(
         getallheaders()
     )
 );
-
