@@ -14,8 +14,14 @@ use App\Core\Promises\reCaptchaServiceConfigPromise;
 class Configuration
 {
 
+    /**
+     * @var array
+     */
     private $array_config;
 
+    /**
+     * @var ExtremeConfigPromise
+     */
     private $promise;
 
     public function __construct()
@@ -38,6 +44,7 @@ class Configuration
         $reCaptchaService->setSiteKey($this->array_config['reCaptchaService']['SiteKey']);
 
         $MySQL = new MysqlDatabasesConfigPromise();
+
         $MySQL->setEnabled($this->array_config['databases']['MySQL']['enabled']);
         $MySQL->setDataBaseName($this->array_config['databases']['MySQL']['data_base_name']);
         $MySQL->setHost($this->array_config['databases']['MySQL']['host']);

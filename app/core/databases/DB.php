@@ -22,11 +22,13 @@ class DB
     /**
      * @param string $query
      * @param array $params
+     * @return PDOStatement
      */
-    public function query(string $query, array $params)
+    public function query(string $query, array $params) : PDOStatement
     {
         $stmt = $this->connection->prepare($query);
         $this->bindParams($stmt, $params);
+        return $stmt;
     }
 
     /**
@@ -39,5 +41,15 @@ class DB
         {
             $statement->bindParam($param, $valueParam);
         }
+    }
+
+    /**
+     * @param PDOStatement $statement
+     * @param int $column_number
+     * @return mixed
+     */
+    public function getColumn(PDOStatement $statement, int $column_number)
+    {
+        return $statement->fetchColumn($column_number);
     }
 }

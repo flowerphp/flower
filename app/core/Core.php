@@ -11,6 +11,9 @@ use GuzzleHttp\Psr7\Request;
 class Core
 {
 
+    /**
+     * @var ExtremeCorePromise
+     */
     private $promise;
 
     public function __construct()
