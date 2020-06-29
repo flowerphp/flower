@@ -41,9 +41,7 @@ class DB
     {
         $stmt = $this->connection->prepare($query);
         if (!empty($params))
-        {
             $stmt = $this->bindParams($stmt, $params);
-        }
         $stmt->execute();
         return $stmt;
     }
