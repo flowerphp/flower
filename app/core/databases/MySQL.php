@@ -7,7 +7,7 @@ namespace App\Core\Databases;
 use App\Core\Core;
 use PDO;
 
-class MySQL
+class MySQL implements iDriverDB
 {
     private $host_name;
     private $db_name;
