@@ -25,21 +25,30 @@ class Core
 
     public function __construct()
     {
-        $CorePromise = new CorePromise();
-        $CorePromise->setRequest(
-            new Request(
-            $_SERVER['REQUEST_METHOD'],
-            $_SERVER['HTTP_HOST'],
-            getallheaders()
-        ));
+        $this->settingPromises();
 
-        $CorePromise->setConfig(new Configuration());
-
-        $this->promise = new ExtremeCorePromise($CorePromise);
         if ($this->promise->getConfig()->getPromise()->getDatabases()->getMySQL()->getEnabled())
         {
             $this->DB = new DB(new MySQL($this));
         }
+    }
+
+    /**
+     * for this class setting Promises
+     */
+    private function settingPromises()
+    {
+        $CorePromise = new CorePromise();
+        $CorePromise->setRequest(
+            new Request(
+                $_SERVER['REQUEST_METHOD'],
+                $_SERVER['HTTP_HOST'],
+                getallheaders()
+            ));
+
+        $CorePromise->setConfig(new Configuration());
+
+        $this->promise = new ExtremeCorePromise($CorePromise);
     }
 
 
