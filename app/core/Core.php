@@ -13,10 +13,15 @@ class Core
 
     private $promise;
 
-    public function __construct(Request $request)
+    public function __construct()
     {
         $CorePromise = new CorePromise();
-        $CorePromise->setRequest($request);
+        $CorePromise->setRequest(
+            new Request(
+            $_SERVER['REQUEST_METHOD'],
+            $_SERVER['HTTP_HOST'],
+            getallheaders()
+        ));
         $CorePromise->setConfig(new Configuration());
 
         $this->promise = new ExtremeCorePromise($CorePromise);
