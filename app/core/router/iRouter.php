@@ -3,9 +3,9 @@
 namespace App\Core\Router;
 
 
+
 interface iRouter
 {
-    public function __construct();
 
     public function get(string $path, $fn);
     public function post(string $path, $fn);
