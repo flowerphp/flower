@@ -18,6 +18,8 @@ class StackTest extends TestCase
 
     /**
      * @depends testEmpty
+     * @param array $stack
+     * @return array
      */
     public function testPush(array $stack)
     {
