@@ -15,11 +15,7 @@ $Core = new Core();
 $Routes = new Routes();
 
 $Routes->add(new Route("get","/",function () {
-    print "text";
-}));
-
-$Routes->add(new Route("get","/mat",function () {
-    print "a";
+    print "#";
 }));
 
 $Routingo = new Routingo($Routes, $Core);
