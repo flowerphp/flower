@@ -7,7 +7,7 @@ namespace App\Core;
 class Collection implements iCollection
 {
 
-    private $collection;
+    protected $collection;
 
 
     /**

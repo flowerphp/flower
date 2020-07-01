@@ -3,24 +3,22 @@
 // Require Autoloader by https://getcomposer.org/
 
 use App\Core\Core;
-use App\Core\Router\Router;
+use App\Core\router\Route;
+use App\Core\router\Routes;
+use App\Core\router\Routingo;
 
 require_once __DIR__ . "/vendor/autoload.php";
 
 $Core = new Core();
 
-$Router = new Router($Core);
+$Routes = new Routes();
 
-$Router->get("/a", function () {
-    return "a";
-});
-$Router->get("/a", function () {
-    return "a";
-});
-$Router->get("/a", function () {
-    return "a";
-});
+$Routes->add(new Route("get","/",function () {
+    return "text";
+}));
 
-print "<pre>";
-var_dump($Router->getRoutes()->_getAll());
-print "</pre>";
+$Routes->add(new Route("get","/mat",function () {
+    return "text";
+}));
+
+$Routingo = new Routingo($Routes, $Core);

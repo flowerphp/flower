@@ -5,9 +5,13 @@ namespace App\Core\Router;
 
 
 use App\Core\Core;
-use App\Core\Promises\Promise;
 use App\Core\promises\ResponsePromise;
 
+/**
+ * Class Router
+ * @package App\Core\Router
+ * @deprecated
+ */
 class Router implements iRouter
 {
 
@@ -111,23 +115,32 @@ class Router implements iRouter
      * @param string $path
      * @param ResponsePromise $responsePromise
      * @param $fn
+     * @return mixed
+     */
+    private function isPathEqual(string $path, ResponsePromise $responsePromise, $fn)
+    {
+        if ($responsePromise->getUri() === $path)
+        {
+            return $fn($responsePromise, $path);
+        }
+        return false;
+    }
+
+    /**
+     * @param string $path
+     * @param ResponsePromise $responsePromise
+     * @param $fn
      * @return bool|mixed
      */
     private function handleResponse(string $path, ResponsePromise $responsePromise, $fn)
     {
-        function isPathEqual(string $path, ResponsePromise $responsePromise, $fn)
-        {
-            if ($responsePromise->getUri() === $path)
-            {
-                $fn($responsePromise, $path);
-            }
-        }
+
 
         if ($this->testUri($responsePromise, "/"))
-            return isPathEqual($path, $responsePromise, $fn);
+            return $this->isPathEqual($path, $responsePromise, $fn);
 
         if ($this->testUri($responsePromise, "\\"))
-            return isPathEqual($path, $responsePromise, $fn);
+            return $this->isPathEqual($path, $responsePromise, $fn);
 
         return false;
     }

@@ -3,7 +3,10 @@
 namespace App\Core\Router;
 
 
-
+/**
+ * Interface iRouter
+ * @package App\Core\Router
+ */
 interface iRouter
 {
 
