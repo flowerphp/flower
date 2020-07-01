@@ -67,11 +67,11 @@ class Routingo
         }
 
         return $this->errorsDetecting([
-            "404" => "a",
-            "500" => "a"
+            "404" => "#",
+            "500" => "#"
         ]);
     }
-    
+
     /**
      * @param array $code
      * @return Closure
