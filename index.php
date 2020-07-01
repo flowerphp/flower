@@ -11,14 +11,15 @@ require_once __DIR__ . "/vendor/autoload.php";
 
 $Core = new Core();
 
+
 $Routes = new Routes();
 
 $Routes->add(new Route("get","/",function () {
-    return "text";
+    print "text";
 }));
 
 $Routes->add(new Route("get","/mat",function () {
-    return "text";
+    print "a";
 }));
 
 $Routingo = new Routingo($Routes, $Core);
