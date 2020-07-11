@@ -33,6 +33,7 @@ class Core
         }
     }
 
+
     /**
      * for this class setting Promises
      */
