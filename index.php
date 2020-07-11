@@ -16,7 +16,7 @@ $Core = new Core();
 $Routes = new Routes();
 
 $Routes->add(new Route("get","/", function () {
-    print View::View("index");
+    return View::View("index");
 }));
 
 $Routingo = new Routingo($Routes, $Core);
