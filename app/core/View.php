@@ -4,10 +4,22 @@
 namespace App\Core;
 
 
+use Jenssegers\Blade\Blade;
+
 class View
 {
-    public static function View(string $view_name, Core $core,  array $data = null)
+    /**
+     * @param string $viewName
+     * @param Core $core
+     * @param array|null $data
+     * @return string
+     */
+    public static function View(string $viewName, array $data = [])
     {
-        return $core->getBlade()->render($view_name, $data);
+        $Blade = new Blade(
+            $_SERVER['DOCUMENT_ROOT']."/resources/views",
+            $_SERVER['DOCUMENT_ROOT']."/app/cache");
+
+        return $Blade->render($viewName, $data);
     }
 }

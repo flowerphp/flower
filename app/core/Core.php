@@ -9,7 +9,6 @@ use App\Core\Databases\MySQL;
 use App\Core\Promises\CorePromise;
 use App\Core\Promises\ExtremeCorePromise;
 use GuzzleHttp\Psr7\Request;
-use Jenssegers\Blade\Blade;
 
 class Core
 {
@@ -24,14 +23,8 @@ class Core
      */
     private $DB = null;
 
-    private $Blade;
-
     public function __construct()
     {
-        $this->Blade = new Blade(
-            $_SERVER['DOCUMENT_ROOT']."/resources/views",
-            $_SERVER['DOCUMENT_ROOT']."/app/cache");
-
         $this->settingPromises();
 
         if ($this->promise->getConfig()->getPromise()->getDatabases()->getMySQL()->getEnabled())
@@ -40,13 +33,6 @@ class Core
         }
     }
 
-    /**
-     * @return Blade
-     */
-    public function getBlade(): Blade
-    {
-        return $this->Blade;
-    }
 
     /**
      * for this class setting Promises
