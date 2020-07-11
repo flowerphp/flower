@@ -49,7 +49,7 @@ class Routingo
         {
             print $response;
         } else {
-            ($response)();
+            print ($response)();
         }
     }
 
