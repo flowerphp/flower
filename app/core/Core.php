@@ -9,6 +9,8 @@ use App\Core\Databases\MySQL;
 use App\Core\Promises\CorePromise;
 use App\Core\Promises\ExtremeCorePromise;
 use GuzzleHttp\Psr7\Request;
+use League\Flysystem\Adapter\Local;
+use League\Flysystem\Filesystem;
 
 class Core
 {
@@ -17,6 +19,8 @@ class Core
      * @var ExtremeCorePromise
      */
     private $promise;
+
+    private $FileSystem;
 
     /**
      * @var DB | null
@@ -33,6 +37,13 @@ class Core
         }
     }
 
+    /**
+     * @return Filesystem
+     */
+    public function getFileSystem() : Filesystem
+    {
+        return $this->FileSystem;
+    }
 
     /**
      * for this class setting Promises
@@ -51,6 +62,10 @@ class Core
 
         $this->promise = new ExtremeCorePromise($CorePromise);
 
+        $Adapter = new Local($_SERVER['DOCUMENT_ROOT']);
+        $FileSystem = new Filesystem($Adapter);
+
+        $this->FileSystem = $FileSystem;
 
     }
 

@@ -24,7 +24,8 @@
     "classmap": [
       "app/core/databases/",
       "app/core/promises/",
-      "app/core/router"
+      "app/core/router",
+      "app/core/session"
     ]
   },
   "require-dev": {
