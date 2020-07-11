@@ -50,6 +50,8 @@ class Core
         $CorePromise->setConfig(new Configuration());
 
         $this->promise = new ExtremeCorePromise($CorePromise);
+
+
     }
 
 
