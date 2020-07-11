@@ -10,7 +10,6 @@ class View
 {
     /**
      * @param string $viewName
-     * @param Core $core
      * @param array|null $data
      * @return string
      */
