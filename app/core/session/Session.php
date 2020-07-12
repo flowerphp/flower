@@ -128,9 +128,7 @@ class Session
                 ->getCore()
                 ->getFileSystem()
                 ->read(
-                    Environment::APP_SESSIONS_PATH .
-                    $_COOKIE[$this->getSessionName()] .
-                    Environment::EXT_SESSIONS)
+                    $this->getPathSessions($_COOKIE[$this->getSessionName()]))
                 , true);
         } catch (FileNotFoundException $e) {
         }
@@ -159,7 +157,7 @@ class Session
                     $this
                         ->getCore()
                         ->getFileSystem()
-                        ->read(Environment::APP_SESSIONS_PATH . $_COOKIE[$this->getSessionName()] . Environment::EXT_SESSIONS)
+                        ->read($this->getPathSessions($_COOKIE[$this->getSessionName()]))
                     , true);
             } catch (FileNotFoundException $e) {
                 // If error
@@ -170,8 +168,10 @@ class Session
     }
 
 
-
-    private function generateIdSession()
+    /**
+     * @return string
+     */
+    private function generateIdSession() : string
     {
         return
             rand(0, 99999999) .
