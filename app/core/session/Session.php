@@ -81,13 +81,67 @@ class Session
         $defaultData = str_replace([":id"], [$SessionId], $defaultData);
         $this->setSessionData($defaultData);
         try {
-            $this->getCore()->getFileSystem()->write(Environment::APP_SESSIONS_PATH . $SessionId . Environment::EXT_SESSIONS, json_encode($defaultData));
+            $this->getCore()->getFileSystem()->write($this->getPathSessions($SessionId), json_encode($defaultData));
         } catch (FileExistsException $e) {
             return false;
         } finally {
             setcookie($this->getSessionName(),$SessionId, strtotime("+365 day"));
         }
         return true;
+    }
+
+    /**
+     * @param $sesId
+     * @return string
+     */
+    private function getPathSessions($sesId) : string
+    {
+        return Environment::APP_SESSIONS_PATH . $sesId . Environment::EXT_SESSIONS;
+    }
+
+    /**
+     * @param string $name
+     * @param $value
+     * @return array
+     */
+    public function setKey(string $name, $value) : array
+    {
+        $sessionData = $this->getSessionData();
+        $sessionData[$name] = $value;
+
+        $this->getCore()->getFileSystem()->put(
+            $this->getPathSessions($_COOKIE[$this->getSessionName()]),
+            json_encode($sessionData)
+        );
+
+        return $sessionData;
+
+    }
+
+    /**
+     * @return array
+     */
+    public function getSessionData() : array
+    {
+        try {
+            return json_decode($this
+                ->getCore()
+                ->getFileSystem()
+                ->read(
+                    $this->getPathSessions($_COOKIE[$this->getSessionName()]))
+                , true);
+        } catch (FileNotFoundException $e) {
+        }
+        return [];
+    }
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function getKey(string $name)
+    {
+        return $this->getSessionData()[$name];
     }
 
     /**
@@ -103,7 +157,7 @@ class Session
                     $this
                         ->getCore()
                         ->getFileSystem()
-                        ->read(Environment::APP_SESSIONS_PATH . $_COOKIE[$this->getSessionName()] . Environment::EXT_SESSIONS)
+                        ->read($this->getPathSessions($_COOKIE[$this->getSessionName()]))
                     , true);
             } catch (FileNotFoundException $e) {
                 // If error
@@ -114,8 +168,10 @@ class Session
     }
 
 
-
-    private function generateIdSession()
+    /**
+     * @return string
+     */
+    private function generateIdSession() : string
     {
         return
             rand(0, 99999999) .
