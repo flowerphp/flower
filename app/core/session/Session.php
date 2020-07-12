@@ -41,8 +41,6 @@ class Session
             "sessionId" => ":id"
         ]);
 
-        $this->delayCheck();
-
     }
 
 
