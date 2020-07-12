@@ -76,7 +76,7 @@ class Configuration
      */
     private function setArrayConfig()
     {
-        $this->array_config = json_decode(file_get_contents("config.json"), true);
+        $this->array_config = json_decode(file_get_contents(Environment::NAME_CONFIG_FILE), true);
     }
 
 }

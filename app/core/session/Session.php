@@ -5,6 +5,7 @@ namespace App\Core\session;
 
 
 use App\Core\Core;
+use App\Core\Environment;
 use League\Flysystem\FileExistsException;
 use League\Flysystem\FileNotFoundException;
 
@@ -71,17 +72,6 @@ class Session
     }
 
     /**
-     * don't completed
-     */
-    private function delayCheck()
-    {
-        if ($this->getSession()['outSessionWork'] >= time())
-        {
-            unlink("./app/cache/sessions/". $this->getSession()['sessionId'] .".session");
-        }
-    }
-
-    /**
      * @return bool
      * @param array $defaultData
      */
@@ -91,7 +81,7 @@ class Session
         $defaultData = str_replace([":id"], [$SessionId], $defaultData);
         $this->setSessionData($defaultData);
         try {
-            $this->getCore()->getFileSystem()->write("./app/cache/sessions/" . $SessionId . ".session", json_encode($defaultData));
+            $this->getCore()->getFileSystem()->write(Environment::APP_SESSIONS_PATH . $SessionId . Environment::EXT_SESSIONS, json_encode($defaultData));
         } catch (FileExistsException $e) {
             return false;
         } finally {
@@ -113,7 +103,7 @@ class Session
                     $this
                         ->getCore()
                         ->getFileSystem()
-                        ->read("./app/cache/sessions/" . $_COOKIE[$this->getSessionName()] . ".session")
+                        ->read(Environment::APP_SESSIONS_PATH . $_COOKIE[$this->getSessionName()] . Environment::EXT_SESSIONS)
                     , true);
             } catch (FileNotFoundException $e) {
                 // If error

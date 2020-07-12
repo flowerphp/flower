@@ -8,6 +8,6 @@
     <title>Main Template</title>
 </head>
 <body>
-    {{ $Session->getSession()['timestamp'] }}
+
 </body>
 </html>
