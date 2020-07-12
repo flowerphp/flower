@@ -36,10 +36,12 @@ class Session
         $this->sessionName = $sessionName;
 
         $this->createSession([
-            "timestamp" => time()
+            "timestamp" => time(),
+            "outSessionWork" => strtotime("+365 day"),
+            "sessionId" => ":id"
         ]);
 
-        $this->setSessionData();
+        $this->delayCheck();
 
     }
 
@@ -62,34 +64,64 @@ class Session
 
     public function createSession($defaultData = [])
     {
-
-
         if (!$this->isAlreadySession())
         {
-            $SessionId = $this->generateIdSession();
-
-            try {
-                $this->getCore()->getFileSystem()->write("./app/cache/sessions/" . $SessionId . ".session", json_encode($defaultData));
-            } catch (FileExistsException $e) {
-                // If error
-            } finally {
-                setcookie($this->getSessionName(),$SessionId);
-            }
+           $this->writeSession($defaultData);
         }
 
+        $this->setSessionData();
     }
 
-    private function setSessionData()
+    /**
+     * don't completed
+     */
+    private function delayCheck()
     {
+        if ($this->getSession()['outSessionWork'] >= time())
+        {
+            unlink("./app/cache/sessions/". $this->getSession()['sessionId'] .".session");
+        }
+    }
+
+    /**
+     * @return bool
+     * @param array $defaultData
+     */
+    private function writeSession(array $defaultData) : bool
+    {
+        $SessionId = $this->generateIdSession();
+        $defaultData = str_replace([":id"], [$SessionId], $defaultData);
+        $this->setSessionData($defaultData);
         try {
-            $this->session = json_decode(
-                $this
-                    ->getCore()
-                    ->getFileSystem()
-                    ->read("./app/cache/sessions/" . $_COOKIE[$this->getSessionName()] . ".session")
-                , true);
-        } catch (FileNotFoundException $e) {
-            // If error
+            $this->getCore()->getFileSystem()->write("./app/cache/sessions/" . $SessionId . ".session", json_encode($defaultData));
+        } catch (FileExistsException $e) {
+            return false;
+        } finally {
+            setcookie($this->getSessionName(),$SessionId, strtotime("+365 day"));
+        }
+        return true;
+    }
+
+    /**
+     * @param array $data
+     */
+    private function setSessionData($data = [])
+    {
+
+        if (empty($data))
+        {
+            try {
+                $this->session = json_decode(
+                    $this
+                        ->getCore()
+                        ->getFileSystem()
+                        ->read("./app/cache/sessions/" . $_COOKIE[$this->getSessionName()] . ".session")
+                    , true);
+            } catch (FileNotFoundException $e) {
+                // If error
+            }
+        } else {
+            $this->session = $data;
         }
     }
 
