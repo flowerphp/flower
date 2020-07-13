@@ -1,3 +1,5 @@
 # Flower
 
-Flower is future flowerphp/flowerphp
+<p align="center">
+   <img width="460" height="300" src="./public/favicon.png">
+</p>
