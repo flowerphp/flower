@@ -21,7 +21,11 @@ class Environ
 
         $this->Session = new Session(
             $this->getAPICore()->getConfig()->getApplication()->getName(),
-            $this->getAPICore()->getCore()
+            $this->getAPICore()->getCore(), [
+                "timestamp" => time(),
+                "outSessionWork" => strtotime("+365 day"),
+                "sessionId" => ":id"
+            ]
         );
     }
 

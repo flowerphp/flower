@@ -30,17 +30,14 @@ class Session
      * Session constructor.
      * @param $sessionName string
      * @param Core $core
+     * @param array $defaultDataForSessions
      */
-    public function __construct(string $sessionName, Core $core)
+    public function __construct(string $sessionName, Core $core, $defaultDataForSessions = [])
     {
         $this->core = $core;
         $this->sessionName = $sessionName;
 
-        $this->createSession([
-            "timestamp" => time(),
-            "outSessionWork" => strtotime("+365 day"),
-            "sessionId" => ":id"
-        ]);
+        $this->createSession($defaultDataForSessions);
 
     }
 
