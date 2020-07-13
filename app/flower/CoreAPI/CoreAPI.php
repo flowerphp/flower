@@ -7,6 +7,7 @@ namespace Flower\CoreAPI;
 use App\Core\Core;
 use App\Core\Databases\DB;
 use App\Core\Promises\ExtremeConfigPromise;
+use League\Flysystem\Filesystem;
 
 class CoreAPI
 {
@@ -20,6 +21,15 @@ class CoreAPI
     public function __construct(Core $core)
     {
         $this->Core = $core;
+
+    }
+
+    /**
+     * @return Filesystem
+     */
+    public function getRootDirectory() : Filesystem
+    {
+        return $this->Core->getFileSystem();
     }
 
     /**
