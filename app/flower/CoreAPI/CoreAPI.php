@@ -21,7 +21,6 @@ class CoreAPI
     public function __construct(Core $core)
     {
         $this->Core = $core;
-
     }
 
     /**

@@ -13,7 +13,7 @@ class View
      * @param array|null $data
      * @return string
      */
-    public static function View(string $viewName, array $data = [])
+    public static function View(string $viewName, array $data = []) : string
     {
         $Blade = new Blade(
             $_SERVER['DOCUMENT_ROOT']."/resources/views",

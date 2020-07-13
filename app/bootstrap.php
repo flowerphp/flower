@@ -3,8 +3,14 @@
 use Flower\Environ;
 
 // Require Autoloader by https://getcomposer.org/
-require_once $_SERVER['DOCUMENT_ROOT']."/vendor/autoload.php";
+require_once $_SERVER['DOCUMENT_ROOT'] . "/vendor/autoload.php";
 
 $Environ = new Environ();
 
-$Environ->getView()::View("index");
+require_once $_SERVER['DOCUMENT_ROOT'] . "/app/routes.php";
+
+try {
+    require_once $_SERVER['DOCUMENT_ROOT'] . "/app/routes.php";
+} catch (Exception $e) {
+
+}

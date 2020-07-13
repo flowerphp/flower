@@ -15,6 +15,7 @@ class Environ
     private $Session;
     private $Env;
     private $View;
+    private $Router;
 
     /**
      * Environ constructor.
@@ -36,6 +37,24 @@ class Environ
             ]
         );
 
+        $this->Router = new RouterAPI\RouterAPI($this->getAPICore());
+
+    }
+
+    /**
+     * @return RouterAPI\RouterAPI
+     */
+    public function getRouter(): RouterAPI\RouterAPI
+    {
+        return $this->Router;
+    }
+
+    /**
+     * @return Session
+     */
+    public function getSession(): Session
+    {
+        return $this->Session;
     }
 
     /**
