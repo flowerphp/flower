@@ -1,7 +1,7 @@
 {
   "name": "flowerphp/flower",
   "description": "Flower a new Framework",
-  "minimum-stability": "stable",
+  "minimum-stability": "dev",
   "license": "AGPL-3.0-only",
   "authors": [
     {
