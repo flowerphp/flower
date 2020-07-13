@@ -28,7 +28,8 @@
       "app/core/databases/",
       "app/core/promises/",
       "app/core/session",
-      "app/flower/CoreAPI"
+      "app/flower/CoreAPI",
+      "app/creatures"
     ]
   },
   "require-dev": {

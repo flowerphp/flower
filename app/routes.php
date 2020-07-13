@@ -1,7 +1,7 @@
 <?php
 
-use App\Core\View;
+use Flower\Creature;
 
 $Environ->getRouter()->getRootRouter()->get("/", function () {
-    print View::View('index');
+    Creature::include(new MainCreature());
 });
