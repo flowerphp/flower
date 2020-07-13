@@ -4,9 +4,8 @@
 namespace Flower\RouterAPI;
 
 
-use AltoRouter;
-use Exception;
 use Flower\CoreAPI\CoreAPI;
+use Klein\Klein;
 
 class RouterAPI
 {
@@ -21,8 +20,16 @@ class RouterAPI
      */
     public function __construct(CoreAPI $coreAPI)
     {
-        $this->rootRouter = new AltoRouter();
+        $this->rootRouter = new Klein();
         $this->CoreAPI = $coreAPI;
+    }
+
+    /**
+     * @return Klein
+     */
+    public function getRootRouter(): Klein
+    {
+        return $this->rootRouter;
     }
 
     /**
@@ -33,14 +40,4 @@ class RouterAPI
         return $this->CoreAPI;
     }
 
-    /**
-     * @param string $method
-     * @param string $route
-     * @param $fn
-     * @throws Exception
-     */
-    public function map(string $method, string $route, $fn)
-    {
-        $this->rootRouter->map($method, $route, $fn());
-    }
 }
