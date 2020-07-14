@@ -26,7 +26,7 @@ class Creature implements CreatureInterface
      * @param CreatureInterface $creature
      * @param string[] $args
      */
-    public static function include(CreatureInterface $creature, string ...$args)
+    public static function include(CreatureInterface $creature, ...$args)
     {
         $creature->use($args);
     }
