@@ -12,7 +12,7 @@
   ],
   "require": {
     "ext-pdo": "*",
-    "guzzlehttp/guzzle": "7.0.1",
+    "guzzlehttp/guzzle": "7.4.3",
     "league/flysystem": "^1.0",
     "ext-json": "*",
     "jenssegers/blade": "^1.3",
